@@ -1,8 +1,8 @@
 // Problem: Shuffle the Array (LeetCode 1470)
 // Difficulty: Easy
-// Approach: I created a new array `result` to store the shuffled values.
-// Then I looped from 0 to n, and for each index, I placed the element from the first half at position `i*2`
-// and the element from the second half at position `i*2+1`.
+// Approach: I created a new array result to store the shuffled values.
+// Then I looped from 0 to n, and for each index, I placed the element from the first half at position i*2
+// and the element from the second half at position i*2+1.
 // This way, the array gets rearranged in the required interleaving pattern.
 
 class Solution {
