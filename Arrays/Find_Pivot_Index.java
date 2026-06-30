@@ -1,6 +1,6 @@
 // Problem: Find Pivot Index (LeetCode 724)
 // Difficulty: Easy
-// Approach: First I calculated the total sum of the array. Then I kept a running `left` sum while iterating through each index.
+// Approach: First I calculated the total sum of the array. Then I kept a running left sum while iterating through each index.
 // At every step, I checked if the left sum equals the right sum (which is total minus left minus current element).
 // If they matched, that index was the pivot. Otherwise, I updated the left sum and continued.
 // If no pivot was found, I returned -1.
