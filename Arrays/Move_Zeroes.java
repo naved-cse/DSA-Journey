@@ -1,6 +1,6 @@
 // Problem: Move Zeroes (LeetCode 283)
 // Difficulty: Easy
-// Approach: I used a pointer `digit` to place non-zero elements in order while scanning the array.
+// Approach: I used a pointer digit to place non-zero elements in order while scanning the array.
 // Each time I found a non-zero, I moved it to the front and advanced the pointer.
 // After finishing the pass, I filled the remaining positions with zeroes, ensuring all zeroes are shifted to the end.
 
