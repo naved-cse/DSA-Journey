@@ -23,3 +23,4 @@ class NumArray {
         // subtract sum up to left from sum up to right+1
         return sumindex[right + 1] - sumindex[left];
     }
+}
