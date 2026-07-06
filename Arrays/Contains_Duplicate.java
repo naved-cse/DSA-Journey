@@ -1,8 +1,8 @@
 // Problem: Contains Duplicate (LeetCode 217)
 // Difficulty: Easy
-// Approach: I used a HashSet to track numbers already seen. While iterating through the array, if adding a number to
-// the set failed, it meant the number was already present, so I returned true immediately. If the loop completed
-// without finding duplicates, I returned false.
+// Approach: I used a HashSet to track numbers already seen. While iterating through the array, if adding a
+// number to the set failed, it meant the number was already present, so I returned true immediately. If the loop
+// completed without finding duplicates, I returned false.
 
 class Solution {
     public boolean containsDuplicate(int[] nums) {
