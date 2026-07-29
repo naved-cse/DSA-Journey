@@ -11,19 +11,22 @@ public class Solution extends GuessGame {
     public int guessNumber(int n) {
         int left = 1;
         int right = n;
-
-        while (left <= right ){
-            int mid = left + (right - left)/2;
-            if (guess(mid) == 0){
-                return mid;
-            }
-            else if (guess(mid) == -1){
-                right = mid -1;
-            }
-            else {
-                left = mid +1;
+        
+        while (left <= right) {
+            // Safe mid calculation to avoid overflow!
+            int mid = left + (right - left) / 2;
+            
+            int result = guess(mid); // Call the API once and save the answer
+            
+            if (result == 0) {
+                return mid; // Jackpot!
+            } else if (result == -1) {
+                right = mid - 1; // Our guess was too high
+            } else {
+                left = mid + 1; // Our guess was too low (result == 1)
             }
         }
-        return -1;
+        
+        return -1; // The code will never actually reach here if the number exists
     }
 }
