@@ -1,20 +1,9 @@
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
 class Solution {
     public boolean isPalindrome(ListNode head) {
-        if (head == null || head.next == null) {
-            return true;
-        }
-
-        // Step 1: Find the middle of the linked list using fast and slow pointers
+        
+        // ==========================================
+        // PHASE 1: Find the Middle (Tortoise & Hare)
+        // ==========================================
         ListNode slow = head;
         ListNode fast = head;
         
@@ -22,43 +11,39 @@ class Solution {
             slow = slow.next;
             fast = fast.next.next;
         }
-
-        // Step 2: Reverse the second half of the list
-        // If the list has an odd number of nodes, 'slow' is exactly the middle node.
-        ListNode secondHalfHead = reverseList(slow);
         
-        // Step 3: Compare the first half and the reversed second half
-        ListNode p1 = head;
-        ListNode p2 = secondHalfHead;
-        boolean isPalindrome = true;
-        
-        while (p2 != null) {
-            if (p1.val != p2.val) {
-                isPalindrome = false;
-                break;
-            }
-            p1 = p1.next;
-            p2 = p2.next;
-        }
-
-        // Step 4 (Optional but good practice): Restore the list to its original state
-        // reverseList(secondHalfHead);
-
-        return isPalindrome;
-    }
-
-    // Helper method to reverse a linked list
-    private ListNode reverseList(ListNode head) {
+        // ==========================================
+        // PHASE 2: Reverse the Second Half
+        // ==========================================
         ListNode prev = null;
-        ListNode curr = head;
+        ListNode curr = slow; // Start reversing from the middle!
         
         while (curr != null) {
-            ListNode nextTemp = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = nextTemp;
+            ListNode nextTemp = curr.next; // Bookmark
+            curr.next = prev;              // Unplug and point backward
+            prev = curr;                   // Slide prev
+            curr = nextTemp;               // Slide curr
         }
         
-        return prev;
+        // ==========================================
+        // PHASE 3: Compare the Two Halves
+        // ==========================================
+        ListNode left = head;  // Starts at the very beginning
+        ListNode right = prev; // 'prev' is standing on the very last node!
+        
+        // Walk until the reversed right half runs out of nodes
+        while (right != null) {
+            
+            if (left.val != right.val) {
+                return false; // Mismatch! Not a palindrome.
+            }
+            
+            // They matched! Step them both forward.
+            left = left.next;
+            right = right.next;
+        }
+        
+        // If the loop finished without returning false, it's a palindrome!
+        return true; 
     }
 }
