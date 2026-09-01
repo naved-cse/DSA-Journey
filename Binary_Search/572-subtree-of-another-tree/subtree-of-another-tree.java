@@ -19,10 +19,10 @@ class Solution {
         return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
     }
 
-    // ==========================================
+    
     // THE INSPECTOR (Strict Boss: &&)
     // Checks if two trees are identical clones all the way to the bottom
-    // ==========================================
+    
     private boolean isSameTree(TreeNode p, TreeNode q) {
         // 1. Both nodes are empty spaces (Perfect match!)
         if (p == null && q == null) {
@@ -34,7 +34,7 @@ class Solution {
             return false;
         }
         
-        // 3. Values match AND left branches match AND right branches match
+        // 3. Values match AND left branches match AND right branches match 
         return (p.val == q.val) 
             && isSameTree(p.left, q.left) 
             && isSameTree(p.right, q.right);
