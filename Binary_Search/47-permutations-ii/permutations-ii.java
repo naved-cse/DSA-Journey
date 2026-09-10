@@ -1,42 +1,34 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 class Solution {
     public List<List<Integer>> permuteUnique(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
-        Arrays.sort(nums); // Sort to bring duplicates together
-        boolean[] used = new boolean[nums.length];
-        backtrack(nums, used, new ArrayList<>(), result);
+        List<Integer> bucket = new ArrayList<>();
+        boolean[] visited = new boolean[nums.length];
+
+        Arrays.sort(nums);
+
+        backtrack(result, bucket, nums, visited);
         return result;
     }
-
-    private void backtrack(int[] nums, boolean[] used, List<Integer> current, List<List<Integer>> result) {
-        if (current.size() == nums.length) {
-            result.add(new ArrayList<>(current));
-            return;
+    private void backtrack(List<List<Integer>> result, List<Integer> bucket, int[]nums, boolean[] visited){
+        if( bucket.size() == nums.length){
+            result.add(new ArrayList<>(bucket));
         }
-
-        for (int i = 0; i < nums.length; i++) {
-            // Skip already used elements
-            if (used[i]) continue;
-
-            // Skip duplicates: if the current element is identical to the previous one 
-            // and the previous element has NOT been used yet in this branch
-            if (i > 0 && nums[i] == nums[i - 1] && !used[i - 1]) {
+        for (int i = 0; i < nums.length; i++){
+            if (visited[i]){
                 continue;
             }
 
-            // Choose
-            used[i] = true;
-            current.add(nums[i]);
+            if (i > 0 && nums[i] == nums[i-1] && !visited[i-1]){
+                continue;
+            }
 
-            // Explore
-            backtrack(nums, used, current, result);
+            bucket.add(nums[i]);
+            visited[i] = true;
 
-            // Un-choose (Backtrack)
-            current.remove(current.size() - 1);
-            used[i] = false;
+            backtrack(result, bucket, nums, visited);
+
+            bucket.remove(bucket.size() - 1);
+            visited[i] = false;
         }
     }
 }
